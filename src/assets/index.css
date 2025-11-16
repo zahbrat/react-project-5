@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --font-alt: "Montserrat Alternates", Calibri, Arial, sans-serif; 
+  --font-sans: "Montserrat", Calibri, Arial, sans-serif; 
+
+  --size-coef: 1;
+
+  --color-orange-300: #FFB36C;
+  --color-neutral-400: #E8E8E8;
+  --color-neutral-600: #D9D9D9;
+}
+
+.con {
+  @apply px-28 w-full;
+}
