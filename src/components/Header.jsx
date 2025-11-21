@@ -1,10 +1,10 @@
 import Btn from "./Btn";
 import LiLink from "./LiLink";
 
-export default function Header() {
+export default function Header({onOpenModal}) {
   return (
     <header className="font-alt">
-      <div class="con flex justify-between items-center py-4">
+      <div className="con flex justify-between items-center py-4">
         <div className="flex justify-between items-center gap-32">
           <img src="/logo.svg" alt="Logo" />
           <nav>
@@ -16,7 +16,7 @@ export default function Header() {
           </nav>
         </div>
         <div className="flex justify-between items-center gap-8">
-          <Btn text="Sign Up" />
+          <Btn text="Sign Up" onClick={onOpenModal} />
           <img src="/user.svg" alt="User Picture" />
         </div>
       </div>

@@ -1,7 +1,34 @@
 import { ImSearch } from "react-icons/im";
 import Btn from "./Btn";
+import Input from './Input'
 
 export default function Promo() {
+  const d = new Date();
+  const weekday = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+
   return (
     <section className="bg-[url(/bg.avif)] bg-blend-darken w-full py-24 text-white">
       <div className="con flex justify-center items-center flex-col gap-12">
@@ -13,16 +40,13 @@ export default function Promo() {
             aware of the weather.
           </p>
           <p className="pl-12 pb-16 flex-1">
-            October 2023 <br />
-            Friday, 13<sup>th</sup>
+            {month[d.getMonth()]} {d.getFullYear()} <br />
+            {weekday[d.getDay()]}, {d.getDate()}
+            <sup>th</sup>
           </p>
         </div>
         <div className="flex justify-center align-center w-[50%]">
-          <input
-            type="text"
-            placeholder="Search location..."
-            className="text-xl placeholder-neutral-500 text-neutral-500 bg-neutral-200 py-2 px-8 rounded-l-[10px] outline-none w-full"
-          />
+          <Input />
           <Btn className="text-black rounded-l-none rounded-r-[10px] border-l-4 border-black !px-4 !py-4">
             <ImSearch />
           </Btn>
