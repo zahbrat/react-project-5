@@ -5,7 +5,7 @@ import Btn from './Btn'
 export default function Pets() {
   return (
     <Section title="Interacting with our pets">
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-2">
         <PetEl
           image="/pet1.png"
           desc="Rescue pups pose as ghosts in festive photo shoot"

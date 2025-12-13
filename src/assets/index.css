@@ -4,13 +4,14 @@
   --font-alt: "Montserrat Alternates", Calibri, Arial, sans-serif; 
   --font-sans: "Montserrat", Calibri, Arial, sans-serif; 
 
-  --size-coef: 1;
+  --breakpoint-xs: 425px;
 
+  --color-red-500: #ff4242;
   --color-orange-300: #FFB36C;
   --color-neutral-400: #E8E8E8;
   --color-neutral-600: #D9D9D9;
 }
 
 .con {
-  @apply px-28 w-full;
+  @apply px-8 xs:px-18 sm:px-20 md:px-22 lg:px-28 w-full;
 }

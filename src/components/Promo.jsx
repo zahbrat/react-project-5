@@ -1,8 +1,13 @@
 import { ImSearch } from "react-icons/im";
 import Btn from "./Btn";
-import Input from './Input'
+import Input from "./Input";
+import { useState } from "react";
 
-export default function Promo() {
+import myFetch from "../functions/myFetch";
+
+export default function Promo({ handleSetWeather }) {
+  const [city, setCity] = useState("");
+
   const d = new Date();
   const weekday = [
     "Sunday",
@@ -28,26 +33,41 @@ export default function Promo() {
     "December",
   ];
 
+  const handleSearch = async () =>
+    handleSetWeather(await myFetch(city, 7));
 
   return (
-    <section className="bg-[url(/bg.avif)] bg-blend-darken w-full py-24 text-white">
-      <div className="con flex justify-center items-center flex-col gap-12">
-        <h1 className="font-semibold text-5xl">Weather dashboard</h1>
-        <div className="flex justify-center text-2xl w-full">
-          <p className="pr-12 pb-16 flex-1 border-r-4 border-white text-right">
+    <section className="bg-[url(/bg.avif)] bg-cover bg-blend-darken w-full py-12 sm:py-24 text-white">
+      <div className="con flex justify-center items-center flex-col gap-6 sm:gap-12">
+        <h1 className="font-semibold text-center text-3xl sm:text-5xl">
+          Weather dashboard
+        </h1>
+        <div className="flex justify-center text-lg sm:text-2xl w-full">
+          <p className="pr-6 sm:pr-12 pb-8 sm:pb-16 flex-1 border-r-4 border-white text-right">
             Create your personal list of <br />
             favorite cities and always be <br />
             aware of the weather.
           </p>
-          <p className="pl-12 pb-16 flex-1">
+          <p className="pl-6 sm:pl-12 pb-8 sm:pb-16 flex-1">
             {month[d.getMonth()]} {d.getFullYear()} <br />
             {weekday[d.getDay()]}, {d.getDate()}
             <sup>th</sup>
           </p>
         </div>
-        <div className="flex justify-center align-center w-[50%]">
-          <Input />
-          <Btn className="text-black rounded-l-none rounded-r-[10px] border-l-4 border-black !px-4 !py-4">
+
+        <div className="flex justify-center align-center sm:w-[50%]">
+          <Input
+            withBtn={true}
+            placeholder="Search location..."
+            type="text"
+            className="text-lg"
+            value={city}
+            onInput={(e) => setCity(e.target.value)}
+          />
+          <Btn
+            className="text-black rounded-l-none rounded-r-[10px] border-l-4 border-black !px-4 !py-4"
+            onClick={handleSearch}
+          >
             <ImSearch />
           </Btn>
         </div>
