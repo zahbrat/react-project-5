@@ -9,6 +9,8 @@ const TARGET_URL = "https://newsapi.org/v2/everything";
 const PAGE_SIZE = 8;
 const QUERY = "pets OR animals OR adoption";
 
+const PLACEHOLDER_URL = "https://placehold.co/600x400?text=No+Image+Available";
+
 const fetchNews = async (page) => {
   const newsApiUrl = `${TARGET_URL}?q=${QUERY}&pageSize=${PAGE_SIZE}&page=${page}&apiKey=${API_KEY}&language=en&sortBy=publishedAt`;
   const url = `${PROXY_URL}${encodeURIComponent(newsApiUrl)}`;
@@ -20,14 +22,12 @@ const fetchNews = async (page) => {
     }
     const data = await response.json();
 
-    const articles = data.articles
-      .map((article, index) => ({
-        id: `${article.url}-${index}`,
-        image: article.urlToImage || null,
-        desc: article.title || "No title provided",
-        url: article.url,
-      }))
-      .filter((article) => article.image !== null);
+    const articles = data.articles.map((article, index) => ({
+      id: `${article.url}-${index}`,
+      image: article.urlToImage || null,
+      desc: article.title || "No title provided",
+      url: article.url,
+    }));
 
     const totalResults = data.totalResults;
     const hasMore = page * PAGE_SIZE < totalResults;
@@ -87,7 +87,7 @@ export default function Pets() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <PetEl image={pet.image} desc={pet.desc} />
+              <PetEl image={pet.image || PLACEHOLDER_URL} desc={pet.desc} />
             </a>
           ))
         ) : (
