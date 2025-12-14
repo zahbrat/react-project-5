@@ -4,12 +4,14 @@ import Btn from "./Btn";
 import { useState, useEffect, useCallback } from "react";
 
 const API_KEY = "ff0e248d387243c7ad1307cb57e658ca";
-const BASE_URL = "https://newsapi.org/v2/everything";
+const PROXY_URL = "https://corsproxy.io/?";
+const TARGET_URL = "https://newsapi.org/v2/everything";
 const PAGE_SIZE = 8;
 const QUERY = "pets OR animals OR adoption";
 
 const fetchNews = async (page) => {
-  const url = `${BASE_URL}?q=${QUERY}&pageSize=${PAGE_SIZE}&page=${page}&apiKey=${API_KEY}&language=en&sortBy=publishedAt`;
+  const newsApiUrl = `${TARGET_URL}?q=${QUERY}&pageSize=${PAGE_SIZE}&page=${page}&apiKey=${API_KEY}&language=en&sortBy=publishedAt`;
+  const url = `${PROXY_URL}${encodeURIComponent(newsApiUrl)}`;
 
   try {
     const response = await fetch(url);
