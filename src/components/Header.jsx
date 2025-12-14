@@ -2,6 +2,9 @@ import { useState } from "react";
 import Btn from "./Btn";
 import LiLink from "./LiLink";
 
+import mainLogo from "../assets/logo.svg";
+import userIcon from "../assets/user.svg";
+
 export default function Header({ onOpenModal, username }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -12,14 +15,14 @@ export default function Header({ onOpenModal, username }) {
   return (
     <header className="font-alt">
       <div className="con flex justify-between items-center py-4">
-        <img src="/logo.svg" alt="Logo" />
+        <img src={mainLogo} alt="Logo" />
 
         <div className="hidden lg:flex items-center gap-16">
           <nav>
             <ul className="flex items-center gap-16">
-              <LiLink text="Who we are?" />
-              <LiLink text="Contacts" />
-              <LiLink text="Menu" />
+              <LiLink text="Weather" id="weather" />
+              <LiLink text="News"  id="news" />
+              <LiLink text="Nature"  id="nature" />
             </ul>
           </nav>
 
@@ -31,7 +34,7 @@ export default function Header({ onOpenModal, username }) {
             ) : (
               <Btn text="Sign Up" onClick={onOpenModal} />
             )}
-            {username && <img src="/user.svg" alt="User Picture" />}
+            {username && <img src={userIcon} alt="User Picture" />}
           </div>
         </div>
 
@@ -43,19 +46,17 @@ export default function Header({ onOpenModal, username }) {
       {isMenuOpen && (
         <nav className="lg:hidden absolute top-25 left-0 w-full bg-orange-200 shadow-lg z-10 p-4">
           <ul className="flex flex-col gap-4">
-            <LiLink text="Who we are?" onClick={toggleMenu} />
-            <LiLink text="Contacts" onClick={toggleMenu} />
-            <LiLink text="Menu" onClick={toggleMenu} />
+            <LiLink text="Weather" onClick={toggleMenu} id="weather" />
+            <LiLink text="News" onClick={toggleMenu} id="news" />
+            <LiLink text="Nature" onClick={toggleMenu} id="nature" />
 
             <hr className="my-2 border-orange-300" />
 
             <div className="flex items-center gap-4 py-2">
               {username ? (
                 <>
-                  <p className="font-medium text-lg">
-                    {username}
-                  </p>
-                  <img src="/user.svg" alt="User Picture" width="30" />
+                  <p className="font-medium text-lg">{username}</p>
+                  <img src={userIcon} alt="User Picture" width="30" />
                 </>
               ) : (
                 <Btn

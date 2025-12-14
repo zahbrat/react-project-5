@@ -5,7 +5,7 @@ import Btn from "./Btn";
 
 const USER_STORAGE_KEY = "userProfile";
 
-export default function SignUpModal({ isOpen, onClose }) {
+export default function SignUpModal({ isOpen, onClose, onSignInSuccess }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +28,10 @@ export default function SignUpModal({ isOpen, onClose }) {
     try {
       localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userProfile));
 
+      if (onSignInSuccess) {
+        onSignInSuccess(username);
+      }
+
       setUsername("");
       setEmail("");
       setPassword("");
@@ -49,7 +53,7 @@ export default function SignUpModal({ isOpen, onClose }) {
           type="text"
           r={true}
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onInput={(e) => setUsername(e.target.value)}
         />
         <Input
           l={true}
@@ -58,7 +62,7 @@ export default function SignUpModal({ isOpen, onClose }) {
           type="email"
           r={true}
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onInput={(e) => setEmail(e.target.value)}
         />
         <Input
           l={true}
@@ -67,7 +71,7 @@ export default function SignUpModal({ isOpen, onClose }) {
           type="password"
           r={true}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onInput={(e) => setPassword(e.target.value)}
         />
 
         <Btn text="Sign Up" className="mx-auto mb-4" submit={true} />

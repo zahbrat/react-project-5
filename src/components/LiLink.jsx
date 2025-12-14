@@ -1,3 +1,3 @@
-export default function LiLink ({text}) {
-  return <li><a href="#" className="hover:underline">{text}</a></li>;
+export default function LiLink ({text, id}) {
+  return <li><a href={"#" + id} className="hover:underline">{text}</a></li>;
 }

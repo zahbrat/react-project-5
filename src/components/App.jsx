@@ -50,6 +50,10 @@ export default function App() {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const handleUserSignIn = (username) => {
+    setUser(username);
+  };
+
   const handleSetWeather = (newItem) => {
     const id = crypto.randomUUID();
     setWeather((prevItems) => [[newItem, false, id], ...prevItems]);
@@ -120,7 +124,11 @@ export default function App() {
       <Nature />
       <Footer />
 
-      <SignModal isOpen={isModalOpen} onClose={closeModal} />
+      <SignModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onSignInSuccess={handleUserSignIn} 
+      />
     </>
   );
 }

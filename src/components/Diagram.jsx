@@ -62,9 +62,9 @@ export default function Diagram({ weather, curCity, hourly }) {
         border: { display: false },
         grid: { drawOnChartArea: true, tickLength: 30 },
         ticks: {
-          padding: 15,
+          padding: 10,
           font: {
-            size: 10,
+            size: 8,
             family: "Montserrat, sans-serif",
           },
         },
@@ -73,9 +73,9 @@ export default function Diagram({ weather, curCity, hourly }) {
         border: { display: false },
         grid: { drawOnChartArea: true, tickLength: 45 },
         ticks: {
-          padding: 15,
+          padding: 10,
           font: {
-            size: 10,
+            size: 8,
             family: "Montserrat, sans-serif",
           },
         },
@@ -88,8 +88,8 @@ export default function Diagram({ weather, curCity, hourly }) {
   if (arr.length && hourly)
     return (
       <Section title={"Daily weather in " + curCity}>
-        <div className="bg-neutral-400 rounded-[20px] px-4 sm:px-12 md:px-24 py-6 sm:py-16 grid grid-cols-1 gap-x-16 gap-y-12 overflow-x-auto">
-          <div className="min-w-[400px] w-full h-[250px] sm:h-[350px]">
+        <div className="bg-neutral-400 rounded-[20px] px-4 sm:px-12 md:px-24 py-6 sm:py-16 grid grid-cols-1 gap-x-16 gap-y-12 w-full">
+          <div className=" w-full h-full">
             <Chart type="line" data={data} options={options} />
           </div>
         </div>

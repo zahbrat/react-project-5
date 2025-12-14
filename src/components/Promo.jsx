@@ -4,6 +4,7 @@ import Input from "./Input";
 import { useState } from "react";
 
 import myFetch from "../functions/myFetch";
+import backgroundImage from "../assets/bg.avif";
 
 export default function Promo({ handleSetWeather }) {
   const [city, setCity] = useState("");
@@ -33,11 +34,18 @@ export default function Promo({ handleSetWeather }) {
     "December",
   ];
 
-  const handleSearch = async () =>
+  const handleSearch = async () => {
+    if (!city.trim()) {
+      return;
+    }
     handleSetWeather(await myFetch(city, 7));
+  };
 
   return (
-    <section className="bg-[url(/bg.avif)] bg-cover bg-blend-darken w-full py-12 sm:py-24 text-white">
+    <section
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="bg-cover bg-blend-darken w-full py-12 sm:py-24 text-white"
+    >
       <div className="con flex justify-center items-center flex-col gap-6 sm:gap-12">
         <h1 className="font-semibold text-center text-3xl sm:text-5xl">
           Weather dashboard

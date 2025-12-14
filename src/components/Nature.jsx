@@ -1,36 +1,40 @@
 import Section from "./Section";
 import { useState, useEffect, useCallback } from "react";
 
-// Увага: Ці шляхи до зображень '/weatherX.png' припускають,
-// що файли знаходяться у папці 'public' вашого проекту.
+import weather1 from "../assets/weather1.png";
+import weather2 from "../assets/weather2.png";
+import weather3 from "../assets/weather3.png";
+import weather4 from "../assets/weather4.png";
+import weather5 from "../assets/weather5.png";
+
 const slidesData = [
   {
     id: 0,
-    imageUrl: "/weather1.png",
+    imageUrl: weather1,
   },
   {
     id: 1,
-    imageUrl: "/weather2.png",
+    imageUrl: weather2,
   },
   {
     id: 2,
-    imageUrl: "/weather3.png",
+    imageUrl: weather3,
   },
   {
     id: 3,
-    imageUrl: "/weather4.png",
+    imageUrl: weather4,
   },
   {
     id: 4,
-    imageUrl: "/weather5.png",
+    imageUrl: weather5,
   },
 ];
 
 export default function Nature() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false); 
+  const [isPaused, setIsPaused] = useState(false);
   const slideCount = slidesData.length;
-  const slideIntervalDuration = 1500; 
+  const slideIntervalDuration = 1500;
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === slideCount - 1 ? 0 : prev + 1));
@@ -38,7 +42,7 @@ export default function Nature() {
 
   useEffect(() => {
     if (isPaused) {
-      return; 
+      return;
     }
 
     const slideInterval = setInterval(nextSlide, slideIntervalDuration);
@@ -50,7 +54,7 @@ export default function Nature() {
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <Section title="Beautiful nature">
+    <Section title="Beautiful nature" id="nature">
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className="relative overflow-hidden rounded-xl aspect-video sm:w-[50%] mx-auto">
           <div

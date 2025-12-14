@@ -1,8 +1,14 @@
-import Section from './Section'
+import Section from "./Section";
 import WeatherDetailsEl from "./WeatherDetailsEl";
 
+import weath1 from "../assets/weath1.svg";
+import weath2 from "../assets/weath2.svg";
+import weath3 from "../assets/weath3.svg";
+import weath4 from "../assets/weath4.svg";
+import weath5 from "../assets/weath5.svg";
+
 export default function WeatherDetails({ weather, curCity, detailed }) {
-  const data = (weather.filter((el) => el[0].location.name === curCity)[0]);
+  const data = weather.filter((el) => el[0].location.name === curCity)[0];
 
   if (data && detailed)
     return (
@@ -11,7 +17,7 @@ export default function WeatherDetails({ weather, curCity, detailed }) {
           <WeatherDetailsEl
             title="Feels like"
             value={data[0].current.feelslike_c}
-            img="/weath1.svg"
+            img={weath1}
             unit="°C"
           />
           <WeatherDetailsEl
@@ -24,24 +30,24 @@ export default function WeatherDetails({ weather, curCity, detailed }) {
           <WeatherDetailsEl
             title="Humidity"
             value={data[0].current.humidity}
-            img="/weath5.svg"
+            img={weath5}
             unit="%"
           />
           <WeatherDetailsEl
             title="Pressure"
             value={data[0].current.pressure_mb}
-            img="/weath2.svg"
+            img={weath2}
             unit=" hPa"
           />
           <WeatherDetailsEl
             title="Wind speed"
             value={data[0].current.wind_kph}
-            img="/weath3.svg"
+            img={weath3}
             unit=" m/s"
           />
           <WeatherDetailsEl
             title="Visibility"
-            img="/weath4.svg"
+            img={weath4}
             value={data[0].current.vis_km}
             unit=" km"
           />

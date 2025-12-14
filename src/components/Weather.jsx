@@ -12,9 +12,9 @@ export default function Weather({
   handleRefreshWeather,
 }) {
   return (
-    <Section>
+    <Section id="weather">
       {weather.length ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-16">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-2 md:gap-8">
           {weather.map((el) => (
             <WeatherEl
               key={el[2]}

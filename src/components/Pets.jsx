@@ -1,29 +1,109 @@
 import Section from "./Section";
-import PetEl from './PetEl'
-import Btn from './Btn'
+import PetEl from "./PetEl";
+import Btn from "./Btn";
+import { useState, useEffect, useCallback } from "react";
+
+const API_KEY = "ff0e248d387243c7ad1307cb57e658ca";
+const BASE_URL = "https://newsapi.org/v2/everything";
+const PAGE_SIZE = 8;
+const QUERY = "pets OR animals OR adoption";
+
+const fetchNews = async (page) => {
+  const url = `${BASE_URL}?q=${QUERY}&pageSize=${PAGE_SIZE}&page=${page}&apiKey=${API_KEY}&language=en&sortBy=publishedAt`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    const articles = data.articles
+      .map((article, index) => ({
+        id: `${article.url}-${index}`,
+        image: article.urlToImage || null,
+        desc: article.title || "No title provided",
+        url: article.url,
+      }))
+      .filter((article) => article.image !== null);
+
+    const totalResults = data.totalResults;
+    const hasMore = page * PAGE_SIZE < totalResults;
+
+    return { news: articles, hasMore: hasMore };
+  } catch (error) {
+    return { news: [], hasMore: false };
+  }
+};
 
 export default function Pets() {
+  const [news, setNews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const loadNews = useCallback(
+    async (nextPage) => {
+      if (loading || (!hasMore && nextPage > 1)) return;
+
+      setLoading(true);
+
+      try {
+        const result = await fetchNews(nextPage);
+
+        setNews((prevNews) => [...prevNews, ...result.news]);
+        setHasMore(result.hasMore);
+        setCurrentPage(nextPage);
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    },
+    [loading, hasMore]
+  );
+
+  useEffect(() => {
+    if (currentPage === 0) {
+      loadNews(1);
+    }
+  }, [loadNews, currentPage]);
+
+  const handleSeeMore = () => {
+    loadNews(currentPage + 1);
+  };
+
   return (
-    <Section title="Interacting with our pets">
+    <Section title="Our news" id="news">
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-2">
-        <PetEl
-          image="/pet1.png"
-          desc="Rescue pups pose as ghosts in festive photo shoot"
-        />
-        <PetEl
-          image="/pet2.png"
-          desc="Cat interrupts morning coffee on sunny Washington morning"
-        />
-        <PetEl
-          image="/pet3.png"
-          desc="New study finds dogs pay more attention to women"
-        />
-        <PetEl
-          image="/pet4.png"
-          desc="Petting dogs gives health benefit, even if they are not yours"
-        />
+        {news.length === 0 && loading ? (
+          <p className="col-span-4 text-center">Loading news...</p>
+        ) : news.length > 0 ? (
+          news.map((pet) => (
+            <a
+              key={pet.id}
+              href={pet.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <PetEl image={pet.image} desc={pet.desc} />
+            </a>
+          ))
+        ) : (
+          <p className="col-span-4 text-center text-gray-600">
+            Sorry, no news found for this query.
+          </p>
+        )}
       </ul>
-      <Btn text="See more"/>
+
+      {hasMore && !loading && <Btn text="See more" onClick={handleSeeMore} />}
+
+      {!hasMore && news.length > 0 && (
+        <p className="text-center text-gray-500 mt-4">All news loaded.</p>
+      )}
+
+      {loading && news.length > 0 && (
+        <p className="col-span-4 text-center">Loading next page...</p>
+      )}
     </Section>
   );
 }

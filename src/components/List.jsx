@@ -8,7 +8,7 @@ export default function List({ weather, curCity, daily }) {
   if (curCity && daily)
     return (
       <Section title={"Weekly weather for " + curCity}>
-        <div className="bg-neutral-400 rounded-[20px] p-4 lg:hidden">
+        <div className="bg-neutral-400 rounded-[20px] px-4 sm:px-12 md:px-24 py-6 sm:py-16 lg:hidden">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {arr.map((el) => (
               <div
@@ -38,7 +38,7 @@ export default function List({ weather, curCity, daily }) {
           </div>
         </div>
 
-        <ul className="hidden lg:flex bg-neutral-400 rounded-[20px] px-24 py-16 flex-col gap-4">
+        <ul className="hidden lg:flex bg-neutral-400 rounded-[20px] px-4 sm:px-12 md:px-24 py-6 sm:py-16 flex-col gap-4">
           {arr.map((el) => (
             <ListItem
               key={el.date_epoch}

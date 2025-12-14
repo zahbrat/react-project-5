@@ -48,7 +48,7 @@ export default function WeatherEl({
   };
 
   return (
-    <li className="bg-neutral-400 rounded-[20px] px-8 py-4">
+    <li className="bg-neutral-400 rounded-[20px] px-4 py-2 md:px-8 md:py-4">
       <div className="flex justify-between align-middle text-sm xs:text-base">
         <p>{city ? city : "Unknown"}</p>
         <p>{country ? country : "Unknown"}</p>
@@ -77,8 +77,8 @@ export default function WeatherEl({
           {degrees ? degrees + "°C" : "Unknown"}
         </p>
       </div>
-      <div className="text-3xl flex justify-between items-center mt-6 sm:mt-8">
-        <IconContext.Provider value={{ className: "text-2xl sm:text-4xl" }}>
+      <div className="text-3xl gap-1 flex justify-between items-center mt-6 sm:mt-8">
+        <IconContext.Provider value={{ className: "text-1xl md:text-4xl" }}>
           <div onClick={refreshEl} className="cursor-pointer">
             <FaArrowRotateRight />
           </div>
@@ -91,7 +91,7 @@ export default function WeatherEl({
           </div>
         </IconContext.Provider>
         <Btn text="See more" className="!text-xs !sm:text-sm" onClick={sD} />
-        <IconContext.Provider value={{ className: "text-2xl sm:text-4xl" }}>
+        <IconContext.Provider value={{ className: "text-1xl sm:text-4xl" }}>
           <div onClick={deleteEl} className="cursor-pointer">
             <FaRegTrashCan />
           </div>
