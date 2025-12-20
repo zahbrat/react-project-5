@@ -36,7 +36,7 @@ export default function Promo({ handleSetWeather }) {
 
   const handleSearch = async () => {
     if (!city.trim()) {
-      toast("This city doesn't exist");
+      toast("You have entered nothing");
       return;
     }
 
