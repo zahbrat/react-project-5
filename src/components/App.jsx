@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./Header";
 import Promo from "./Promo";
@@ -121,13 +123,22 @@ export default function App() {
       <Diagram weather={weather} curCity={curCity} hourly={hourly} />
       <List weather={weather} curCity={curCity} daily={daily} />
       <Pets />
-      <Nature />
+      <Nature user={user} />
       <Footer />
 
       <SignModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onSignInSuccess={handleUserSignIn} 
+        onSignInSuccess={handleUserSignIn}
+      />
+
+      <ToastContainer 
+        position="top-right"
+        toastClassName={(context) => 
+          "relative flex px-8 py-4 min-h-10 rounded-2xl justify-between overflow-hidden cursor-pointer shadow-2xl m-4 border border-slate-100 text-black bg-neutral-400"
+        }
+        bodyClassName={() => "flex items-center text-sm font-medium text-black p-1 m-1"}
+        progressClassName="bg-orange-300"
       />
     </>
   );

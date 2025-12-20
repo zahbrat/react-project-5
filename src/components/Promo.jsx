@@ -2,7 +2,7 @@ import { ImSearch } from "react-icons/im";
 import Btn from "./Btn";
 import Input from "./Input";
 import { useState } from "react";
-
+import { toast } from "react-toastify";
 import myFetch from "../functions/myFetch";
 import backgroundImage from "../assets/bg.avif";
 
@@ -36,9 +36,14 @@ export default function Promo({ handleSetWeather }) {
 
   const handleSearch = async () => {
     if (!city.trim()) {
+      toast("This city doesn't exist");
       return;
     }
-    handleSetWeather(await myFetch(city, 7));
+
+    const data = await myFetch(city, 7);
+    if (data) {
+      handleSetWeather(data);
+    }
   };
 
   return (

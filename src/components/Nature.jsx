@@ -30,7 +30,7 @@ const slidesData = [
   },
 ];
 
-export default function Nature() {
+export default function Nature(user) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const slideCount = slidesData.length;
@@ -53,7 +53,7 @@ export default function Nature() {
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
 
-  return (
+  if (user.user) return (
     <Section title="Beautiful nature" id="nature">
       <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <div className="relative overflow-hidden rounded-xl aspect-video sm:w-[50%] mx-auto">

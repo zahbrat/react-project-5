@@ -82,7 +82,7 @@ export default function Pets() {
         ) : news.length > 0 ? (
           news.map((pet) => (
             <a
-              key={pet.id}
+              key={crypto.randomUUID()}
               href={pet.url}
               target="_blank"
               rel="noopener noreferrer"
